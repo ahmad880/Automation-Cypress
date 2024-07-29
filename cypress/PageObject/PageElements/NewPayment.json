@@ -1,0 +1,15 @@
+{
+    "newPaymentPageLocators":{
+        "newPaymentHeader":".ant-tabs-nav-list > :nth-child(3)",
+        "createAPayment":":nth-child(1) > .ant-col > .ant-typography",
+        "searchField":".ant-select-selector",
+        "addRecipientPageHeading":":nth-child(1) > .ant-col > .ant-typography",
+        "addRecipient":"button[class='ant-btn ant-btn-primary ant-btn-sm bg-light-green'] span",
+        "enterPaymentDetailsHeading":".ant-card-body > :nth-child(1) > [style=''] > .ant-typography",
+        "selectCurrency":"#currency",
+        "sendAmount":"#youSend",
+        "fundingMethodHeading":".ant-row-space-between > :nth-child(1) > :nth-child(1) > .ant-col > .ant-space > [style=''] > .ant-typography",
+        "fundingMethodField":"#fundingMethod",
+        "fxRateTimer":"[class='ant-progress-text']"
+    }
+}

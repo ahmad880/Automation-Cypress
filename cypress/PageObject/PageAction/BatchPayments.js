@@ -307,4 +307,33 @@ export class BatchPayments {
         cy.get('[data-row-key="0"] > :nth-child(1)').should('be.visible').should('contain.text','Individual Recipient Through Batch')
 
     }
+    addBusinessRecipientFromBatch(){
+        cy.get('#recipientBankCountry').should('be.visible').click().get(variable1.additionalCurrenciesLocators.countryDropDownHeading).should('be.visible').type('united kingdom{enter}')
+        cy.get('#recipientCurrency').should('be.visible').wait(2000).type('GBP{enter}')
+        cy.get(':nth-child(4) > :nth-child(1) > .ant-form-item > .ant-row > .ant-form-item-label').should('contain.text','IBAN')
+        cy.get('#iban').should('be.visible').type('GB29NWBK60161331926819')
+        cy.get('#swift').should('be.visible').type('AWAXGB21')
+        cy.get('#accNumber').should('be.visible').type('12345677')
+        cy.get('#sortCode').should('be.visible').type('521455')
+        cy.get('.ant-col-sm-17 > .ant-card > .ant-card-body').should('be.visible')
+        cy.get('.ant-space-vertical > :nth-child(1) > .ant-space > [style=""] > .ant-typography').should('contain.text','Bank Detail Summary')
+        cy.get('.ant-space > :nth-child(2) > .ant-card > .ant-card-body').should('be.visible')
+        cy.get(':nth-child(2) > .ant-card > .ant-card-body > :nth-child(2) > .ant-col > .ant-typography').should('contain.text','Business').click()
+        cy.get('#businessName').scrollIntoView()
+        cy.get('#businessName').type('Business Recipient Through Batch')
+        cy.get('#businessDescription').should('be.visible').type('manual testing')
+        cy.get('#businessNature').should('be.visible').type('automation')
+        cy.get('#businessWebsite').should('be.visible').type('www.testing.com')
+        cy.get('#address').should('be.visible').type('House no 11 Texas')
+        cy.get('#beneficiaryCity').should('be.visible').type('Texas')
+        cy.get('#beneficiaryCountry').should('be.visible').type('United Kingdom{enter}')
+        cy.get(':nth-child(8) > .ant-col-xs-24 > :nth-child(1) > .ant-row > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-select > .ant-select-selector').should('be.visible').click()
+        cy.get('[class="ant-select-item ant-select-item-option"]').eq(1).should('be.visible').click()
+        cy.get('#submit').should('be.visible').should('be.enabled').click()
+        cy.get('.ant-notification-notice-message').should('be.visible').should('contain.text','Recipient Added Successfully!')
+        cy.get('.ant-card-body > .ant-row-space-between > :nth-child(1)').should('be.visible').should('contain.text','Recipient Details')
+        cy.get('.ant-tabs-nav-list > :nth-child(2)').should('be.visible').click()
+        cy.get('[data-row-key="0"] > :nth-child(1)').should('be.visible').should('contain.text','Business Recipient Through Batch')
+
+    }
 }

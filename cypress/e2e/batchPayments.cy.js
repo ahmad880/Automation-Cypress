@@ -8410,7 +8410,14 @@ describe('Batch Payments',function(){
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
         batchPayments.goToAddNewRecipient()
-        batchPayments.addIndvidualRecipientFromBatch()
+        batchPayments.addIndvidualRecipientFromBatch()  
+    })
+    it('TC_BP_132 - Verify that user is able to add Business recipient through batch payment page', function(){
+        newRecipient.goToPaymentsDashborad()
+        batchPayments.goToBatchPaymentPage()
+        batchPayments.goToPayMultipleRecipient()
+        batchPayments.goToAddNewRecipient()
+        batchPayments.addBusinessRecipientFromBatch()
         
     })
 })

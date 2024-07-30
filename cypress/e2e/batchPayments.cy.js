@@ -8405,4 +8405,12 @@ describe('Batch Payments',function(){
         batchPayments.validateproceedflow(amount,amount1)
         batchPayments.validateYapilyFlow()
     })
+    it('TC_BP_131 - Verify that user is able to add Individual recipient through batch payment page', function(){
+        newRecipient.goToPaymentsDashborad()
+        batchPayments.goToBatchPaymentPage()
+        batchPayments.goToPayMultipleRecipient()
+        batchPayments.goToAddNewRecipient()
+        batchPayments.addIndvidualRecipientFromBatch()
+        
+    })
 })

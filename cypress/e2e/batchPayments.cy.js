@@ -8420,4 +8420,11 @@ describe('Batch Payments',function(){
         batchPayments.addBusinessRecipientFromBatch()
         
     })
+    it.only('TC_BP_133 - Verify that user can see the details of recipient on batch payment page by clicking View Details', function(){
+        newRecipient.goToPaymentsDashborad()
+        batchPayments.goToBatchPaymentPage()
+        batchPayments.goToPayMultipleRecipient()
+        batchPayments.viewDetails()
+    })
+
 })

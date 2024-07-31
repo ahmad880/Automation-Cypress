@@ -336,4 +336,34 @@ export class BatchPayments {
         cy.get('[data-row-key="0"] > :nth-child(1)').should('be.visible').should('contain.text','Business Recipient Through Batch')
 
     }
+    viewDetails(){
+        let selectedValue1;
+        cy.get('.ant-select-selection-overflow').should('be.visible').click()
+       
+        cy.get('[class="rc-virtual-list-holder-inner"] [title*=" "]').eq(5).should('be.visible').then(option => {
+             selectedValue1 = option.text(); // Get the text of the selected option
+            option.click(); // Click to select the option
+
+            // Log the selected value
+            cy.log(`Selected value1: ${selectedValue1}`);
+        });
+        //cy.get('[style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;"] > .ant-space > :nth-child(1) > .ant-typography').should('contain.text',selectedValue1)
+        cy.get('[style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;"] > .ant-space > :nth-child(1) > .ant-typography')
+          .should('be.visible')
+          .invoke('text') // Get the text content
+          .then(displayedValue => {
+              // Log the displayed value
+              cy.log(`Displayed value: ${displayedValue}`);
+              // Compare the displayed value with selectedValue1
+              expect(displayedValue).to.equal(selectedValue1);
+          }).then(() => {
+          cy.get('[style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;"] > .ant-row > .ant-col > .ant-typography').should('be.visible').should('contain.text','View Details').click()
+          cy.get(':nth-child(1) > .ant-col > .ant-typography')
+          .should('be.visible')
+          .should('contain.text','Recipient Details')
+          cy.get('.m-t-10 > .ant-col > .ant-table-wrapper > .ant-spin-nested-loading > .ant-spin-container > [data-testid="container"] > .ant-table-container > .ant-table-content > table > .ant-table-tbody > .ant-table-row > :nth-child(1)')
+          .should('be.visible')
+          .should('contain.text',selectedValue1)
+        });
+    }
 }

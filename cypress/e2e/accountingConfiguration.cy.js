@@ -16,7 +16,14 @@ describe('Additional Currencies ',function(){
     })
     it('TC-AC-001 - Verify that user is able to navigate to accounting configuration page from menu', function(){
         signin.Login(userName,password)
+        configuration.goToAccountingConfiguration()
     })
+    it.only('TC-AC-002 - Verify that all content is available on accounting configuration page', function(){
+        signin.Login(userName,password)
+        configuration.goToAccountingConfiguration()
+        configuration.contentValidation()
+    })
+    
 
 
 })

@@ -340,7 +340,7 @@ export class BatchPayments {
         let selectedValue1;
         cy.get('.ant-select-selection-overflow').should('be.visible').click()
        
-        cy.get('[class="rc-virtual-list-holder-inner"] [title*=" "]').eq(5).should('be.visible').then(option => {
+        cy.get('[class="rc-virtual-list-holder-inner"] [title*=" "]').eq(2).should('be.visible').then(option => {
              selectedValue1 = option.text(); // Get the text of the selected option
             option.click(); // Click to select the option
 

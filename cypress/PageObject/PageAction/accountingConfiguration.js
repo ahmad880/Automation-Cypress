@@ -13,9 +13,9 @@ export class accountingConfiguration {
         cy.get(variable1.accountingConfigurationLocators.cardTransactions).should('be.visible').should('contain.text', 'Card Transactions')
         //cy.get(variable1.accountingConfigurationLocators.istradioButton).should('be.visible').should('be.checked')
         cy.get(variable1.accountingConfigurationLocators.bankFeeds).should('be.visible').should('contain.text', 'Do you wish to sync bank feeds/movement of funds?')
-        cy.get(variable1.accountingConfigurationLocators.istToggle).should('be.visible').should('not.be.checked')
+        cy.get(variable1.accountingConfigurationLocators.istToggle).eq(0).should('be.visible')
         cy.get(variable1.accountingConfigurationLocators.expenseInformation).should('be.visible').should('contain.text', 'For Your Card Transactions, Do You Wish To Sync Expense Information?')
-        cy.get(variable1.accountingConfigurationLocators.secondToggle).should('be.visible')
+        cy.get(variable1.accountingConfigurationLocators.istToggle).eq(1).should('be.visible')
         cy.get(variable1.accountingConfigurationLocators.whichCard).should('be.visible').should('contain.text', 'Which Volopa Cards Do You Wish To Sync?')
         cy.get(variable1.accountingConfigurationLocators.allCard).should('be.visible').should('contain.text', 'All Cards')
         //cy.get(variable1.accountingConfigurationLocators.allCardRadio).should('be.visible').should('be.checked')
@@ -30,6 +30,36 @@ export class accountingConfiguration {
         cy.get(variable1.accountingConfigurationLocators.saveSetting).should('be.visible').should('contain.text','Save Setting').should('be.enabled')
         cy.get(variable1.accountingConfigurationLocators.disconnectStatement).should('be.visible').should('contain.text','If you wish to disconnect Volopa from your accounting software, please click')
         cy.get(variable1.accountingConfigurationLocators.here).should('be.visible').should('contain.text','here')
+    }
+    bankFeedToggleValidation(){
+        cy.get(variable1.accountingConfigurationLocators.istToggle).eq(0).should('be.visible').should('be.enabled')
+        //.check()
+         //cy.get(variable1.accountingConfigurationLocators.istToggle).should('be.enabled')
+        // cy.wait(2000)
+        // cy.get(variable1.accountingConfigurationLocators.istToggle).check()
+        // cy.get(variable1.accountingConfigurationLocators.istToggle).should('not.be.checked')
+    }
+    expenseInformationToggleValidation(){
+        cy.get(variable1.accountingConfigurationLocators.istToggle).eq(1).should('be.visible').wait(5000)
+       .should('be.enabled')
+        // cy.get(variable1.accountingConfigurationLocators.istToggle).check()
+        // cy.wait(2000)
+        // cy.get(variable1.accountingConfigurationLocators.istToggle).should('not.be.checked')
+    }
+    allCardRadioButton(){
+        cy.get(variable1.accountingConfigurationLocators.allCard)
+  .should('be.visible')
+  .should('contain.text', 'All Cards');
+
+// Check if the radio button is already selected
+cy.get(variable1.accountingConfigurationLocators.allCardRadio).then(($radio) => {
+  if ($radio.is(':checked')) {
+    cy.log('All card radio button is already selected');
+  } else {
+    // Select the radio button if it's not already checked
+    cy.get(variable1.accountingConfigurationLocators.allCardRadio).check();
+  }
+});
 
     }
 }

@@ -1,4 +1,4 @@
-/// <reference types= "Cypress" />
+/// <reference types= "cypress" />
 
 import { accountingConfiguration } from "../PageObject/PageAction/accountingConfiguration";
 import { SigninPage } from "../PageObject/PageAction/SigninPage";

@@ -1,14 +1,31 @@
 /// <reference types= "cypress" />
+import { SigninPage } from "../PageObject/PageAction/SigninPage";
+import { collection } from "../PageObject/PageAction/collection";
 
-
+const signin = new SigninPage
+const collect = new collection
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 describe('Automate POST API with WSSE Header', () => {
+    let userName = 'faisal_tests_vo-201_5th_eea@gmail.com'
+    let password = 'testTest1'
+    beforeEach(() => {
+        cy.visit('https://webapp4.volopa.com/')
+        signin.Login(userName, password)
+        cy.viewport(2048,1280)
+    })
     const baseUrl = 'https://devapi.volopa.com/VolopaApi';
     const endpoint = '/tcc/demo/funding/create';
-    const eea = 0;
-    const currency = 'EUR';
-    const amount = 10;
-    const onBehalfOf = '0ac738b5-aea6-4647-8394-e86bb8b6d0ca';
-    const receiverAccountNumber = 'GB01TCCL36418679605565';
+    const eea = 1;
+    const currency = 'GBP';
+    const min = 5;
+    const max = 10;
+    const amount = getRandomNumber(min, max);
+    //const amount = 10;
+    const sender= 'Test sender'
+    const onBehalfOf = '9b1abde1-755c-4219-89a4-023f2c069826';
+    const receiverAccountNumber = 'GB76TCCL12345661162490';
   
     const wsseUser = 'devApiUser';
     const wsseSecret = '87SDKhf!n@$#T@4gA1fg34s';
@@ -192,6 +209,14 @@ describe('Automate POST API with WSSE Header', () => {
     }
   
     it('should return 200 for the POST API call', () => {
+        collect.goToCollection()
+        cy.get('.ant-tabs-nav-list > :nth-child(2)').should('be.visible').click()
+        collect.getCurrencyBalance(currency).then(previousBalance=>{
+          cy.wrap(previousBalance).as('previousBalance')
+        })
+            
+        
+        
       // Generate the WSSE header
       const wsseHeaderValue = generateWsseHeader(wsseUser, wsseSecret);
   
@@ -212,6 +237,7 @@ describe('Automate POST API with WSSE Header', () => {
         }
       }).then((response) => {
         // Check if the response status is 200
+        cy.log(response)
         expect(response.status).to.eq(200);
   
         // Validate JSON response
@@ -224,16 +250,16 @@ describe('Automate POST API with WSSE Header', () => {
         //expect(result).to.have.property('id', '196CCB2C-F7E6-A40B-24FF-8BC3D25FE9B6');
         //expect(result).to.have.property('account_id', 'd58e62a6-568c-4391-84ea-35df6616b692');
         expect(result).to.have.property('state', 'pending');
-        expect(result).to.have.property('sender_name', 'Test sender');
+        expect(result).to.have.property('sender_name', sender);
         expect(result).to.have.property('sender_address', null);
         expect(result).to.have.property('sender_country', null);
         expect(result).to.have.property('sender_reference', null);
         expect(result).to.have.property('sender_account_number', null);
         expect(result).to.have.property('sender_routing_code', null);
-        expect(result).to.have.property('receiver_account_number', 'GB01TCCL36418679605565');
+        expect(result).to.have.property('receiver_account_number', receiverAccountNumber);
         expect(result).to.have.property('receiver_routing_code', null);
-        expect(result).to.have.property('amount', '10.00');
-        expect(result).to.have.property('currency', 'EUR');
+        expect(result).to.have.property('amount', (amount.toFixed(2)));
+        expect(result).to.have.property('currency',currency);
         expect(result).to.have.property('action', 'approve');
         //expect(result).to.have.property('short_reference', 'IF-20240807-R5V8CC');
         //expect(result).to.have.property('created_at', '2024-08-07T07:51:50+00:00');
@@ -244,16 +270,16 @@ describe('Automate POST API with WSSE Header', () => {
         //expect(responseObj).to.have.property('id', '196CCB2C-F7E6-A40B-24FF-8BC3D25FE9B6');
         //expect(responseObj).to.have.property('account_id', 'd58e62a6-568c-4391-84ea-35df6616b692');
         expect(responseObj).to.have.property('state', 'pending');
-        expect(responseObj).to.have.property('sender_name', 'Test sender');
+        expect(responseObj).to.have.property('sender_name', sender);
         expect(responseObj).to.have.property('sender_address', null);
         expect(responseObj).to.have.property('sender_country', null);
         expect(responseObj).to.have.property('sender_reference', null);
         expect(responseObj).to.have.property('sender_account_number', null);
         expect(responseObj).to.have.property('sender_routing_code', null);
-        expect(responseObj).to.have.property('receiver_account_number', 'GB01TCCL36418679605565');
+        expect(responseObj).to.have.property('receiver_account_number', receiverAccountNumber);
         expect(responseObj).to.have.property('receiver_routing_code', null);
-        expect(responseObj).to.have.property('amount', '10.00');
-        expect(responseObj).to.have.property('currency', 'EUR');
+        expect(responseObj).to.contain.property('amount', (amount.toFixed(2)));
+        expect(responseObj).to.have.property('currency', currency);
         expect(responseObj).to.have.property('action', 'approve');
         //expect(responseObj).to.have.property('short_reference', 'IF-20240807-R5V8CC');
         //expect(responseObj).to.have.property('created_at', '2024-08-07T07:51:50+00:00');
@@ -262,6 +288,16 @@ describe('Automate POST API with WSSE Header', () => {
         // Optionally log the response for debugging
         cy.log('Response:', response);
       });
-    });
-  });
-  
+      
+
+      cy.reload()
+      collect.getCurrencyBalance(currency).then(newBalance => {
+        cy.log('New Balance:', newBalance);
+        cy.get('@previousBalance').then(previousBalance => {
+            cy.log('Retrieved Previous Balance:', previousBalance)
+            cy.log('Retrieved New Balance:', newBalance)
+            expect(parseFloat(newBalance.replace(/,/g, ''))).to.be.eq(parseFloat(previousBalance.replace(/,/g, ''))+parseFloat(amount))
+        });
+    }); 
+  })
+})

@@ -11,7 +11,7 @@ const signin = new SigninPage
 const paymentspage = new PaymentsDashboard
 
 describe('Batch Payments',function(){
-    let userName = 'qwerty_admin_1'
+    let userName = 'testnew@volopa.com'
     let password = 'testTest1'
     beforeEach(() => {
         cy.visit('https://webapp2.volopa.com/')
@@ -379,7 +379,7 @@ describe('Batch Payments',function(){
         batchPayments.proceedflowEUR('{downarrow}{downarrow}{enter}','Push Fund')
         batchPayments.validateproceedflow(amount,amount1)
     })
-    it('TC_BP_017 - Add 2 recipients(individual) from the "Add Recipient" page with country = UNITED KINGDOM and currency = GBP. After adding, make a batch payment to these recipients using EUR and push funds.', function(){
+    it.only('TC_BP_017 - Add 2 recipients(individual) from the "Add Recipient" page with country = UNITED KINGDOM and currency = GBP. After adding, make a batch payment to these recipients using EUR and push funds.', function(){
         newRecipient.goToPaymentsDashborad()
         newRecipient.gotoRecipientList()
         let email = batchPayments.generateRandomString(5)+ '@yopmail.com'
@@ -1374,7 +1374,7 @@ describe('Batch Payments',function(){
     // Euro Zone 
     // individual Recipient
     // Push Fund
-    it('TC_BP_031 - Add 2 recipients(individual) from the "Add Recipient" page with country = GERMANY and currency = EUR. After adding, make a batch payment to these recipients using GBP and push funds.', function(){
+    it.only('TC_BP_031 - Add 2 recipients(individual) from the "Add Recipient" page with country = GERMANY and currency = EUR. After adding, make a batch payment to these recipients using GBP and push funds.', function(){
         newRecipient.goToPaymentsDashborad()
         newRecipient.gotoRecipientList()
         let email = batchPayments.generateRandomString(5)+ '@yopmail.com'
@@ -5726,7 +5726,7 @@ describe('Batch Payments',function(){
         batchPayments.validateproceedflow(amount,amount1)
     })
     //Easy Transfer
-    it('TC_BP_093 - Add 2 recipients(individual) from the "Add Recipient" page with country = GERMANY and currency = USD. After adding, make a batch payment to these recipients using GBP and easy transfer.', function(){
+    it('TC_BP_093 - Add 2 recipients(individual) from the "Add Recipient" page with country = UNITED STATES and currency = USD. After adding, make a batch payment to these recipients using GBP and easy transfer.', function(){
         newRecipient.goToPaymentsDashborad()
         newRecipient.gotoRecipientList()
         let email = batchPayments.generateRandomString(5)+ '@yopmail.com'
@@ -6160,7 +6160,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('CHINA{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetailsWithAccNo('AYCLCNBY','55555555')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'CHINA{enter}')
+        batchPayments.individualRecipient('CHINA USD PF',lName,'CHINA{enter}')
         batchPayments.paymentPurposeGBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6176,7 +6176,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('CHINA{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetailsWithAccNo('AYCLCNBY','55555555')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'CHINA{enter}')
+        batchPayments.individualRecipient('CHINA USD PF',lName1,'CHINA{enter}')
         batchPayments.paymentPurpose1GBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6190,10 +6190,10 @@ describe('Batch Payments',function(){
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
        
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'CHINA USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'CHINA USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
         //Validate Purpose on batch payment
         cy.get('.ant-select-selector').eq(2).click()
@@ -6453,7 +6453,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('INDIA{downarrow}{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetailsWithAccNo('IDIBINBBXXX','55555555')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'INDIA{downarrow}{enter}')
+        batchPayments.individualRecipient('INDIA USD PF',lName,'INDIA{downarrow}{enter}')
         batchPayments.paymentPurposeGBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6468,7 +6468,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('INDIA{downarrow}{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetailsWithAccNo('IDIBINBBXXX','55555555')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'INDIA{downarrow}{enter}')
+        batchPayments.individualRecipient('INDIA USD PF',lName1,'INDIA{downarrow}{enter}')
         batchPayments.paymentPurpose1GBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6481,10 +6481,10 @@ describe('Batch Payments',function(){
         cy.reload()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'INDIA USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'INDIA USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
              //Validate Purpose on batch payment
             cy.get('.ant-select-selector').eq(2).click()
@@ -6730,7 +6730,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('UNITED ARAB EMIRATES{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetails('AE070331234567890123456','AARPAEAA')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'UNITED ARAB EMIRATES{enter}')
+        batchPayments.individualRecipient('UAE USD PF',lName,'UNITED ARAB EMIRATES{enter}')
         batchPayments.paymentPurpose()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6745,7 +6745,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('UNITED ARAB EMIRATES{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetails('AE070331234567890123456','AARPAEAA')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'UNITED ARAB EMIRATES{enter}')
+        batchPayments.individualRecipient('UAE USD PF',lName1,'UNITED ARAB EMIRATES{enter}')
         batchPayments.paymentPurpose1()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -6758,10 +6758,10 @@ describe('Batch Payments',function(){
         cy.reload()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'UAE USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'UAE USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
             //Validate Purpose on batch payment
             cy.get('.ant-select-selector').eq(1).click()
@@ -6790,7 +6790,7 @@ describe('Batch Payments',function(){
         batchPayments.proceedflow('{downarrow}{enter}','GBP','{downarrow}{downarrow}{enter}','Push Fund')
         batchPayments.validateproceedflow(amount,amount1)
     })
-    it('TC_BP_108 - Add 2 recipients(business) from the "Add Recipient" page with country = United Arab Emirates and currency = AED. After adding, make a batch payment to these recipients using GBP and push funds.', function(){
+    it('TC_BP_108 - Add 2 recipients(business) from the "Add Recipient" page with country = United Arab Emirates and currency = USD. After adding, make a batch payment to these recipients using GBP and push funds.', function(){
         newRecipient.goToPaymentsDashborad()
         newRecipient.gotoRecipientList()
         let email = batchPayments.generateRandomString(5)+ '@yopmail.com'
@@ -6928,7 +6928,7 @@ describe('Batch Payments',function(){
         batchPayments.validateproceedflow(amount,amount1)
         batchPayments.validateYapilyFlow()
     })
-    it('TC_BP_110 - Add 2 recipients(business) from the "Add Recipient" page with country = United Arab Emirates and currency = AED. After adding, make a batch payment to these recipients using GBP and easy transfer.', function(){
+    it('TC_BP_110 - Add 2 recipients(business) from the "Add Recipient" page with country = United Arab Emirates and currency = USD. After adding, make a batch payment to these recipients using GBP and easy transfer.', function(){
         newRecipient.goToPaymentsDashborad()
         newRecipient.gotoRecipientList()
         let email = batchPayments.generateRandomString(5)+ '@yopmail.com'
@@ -7007,7 +7007,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('AUSTRALIA{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetailsWithAccNo('ABNAAU2BOBU','55555555')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'AUSTRALIA{enter}')
+        batchPayments.individualRecipient('AUSTRALIA USD PF',lName,'AUSTRALIA{enter}')
         batchPayments.paymentPurposeGBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -7022,7 +7022,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('AUSTRALIA{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetailsWithAccNo('ABNAAU2BOBU','55555555')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'AUSTRALIA{enter}')
+        batchPayments.individualRecipient('AUSTRALIA USD PF',lName1,'AUSTRALIA{enter}')
         batchPayments.paymentPurpose1GBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -7035,10 +7035,10 @@ describe('Batch Payments',function(){
         cy.reload()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'AUSTRALIA USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'AUSTRALIA USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
             //Validate Purpose on batch payment
             cy.get('.ant-select-selector').eq(2).click()
@@ -7284,7 +7284,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('CANADA{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetailsWithAccNo('ROYCCAT2','55555555')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'CANADA{enter}')
+        batchPayments.individualRecipient('CANADA USD PF',lName,'CANADA{enter}')
         newRecipient.postCodeState()
         batchPayments.paymentPurposeGBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
@@ -7300,7 +7300,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('CANADA{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetailsWithAccNo('ROYCCAT2','55555555')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'CANADA{enter}')
+        batchPayments.individualRecipient('CANADA USD PF',lName1,'CANADA{enter}')
         newRecipient.postCodeState()
         batchPayments.paymentPurpose1GBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
@@ -7314,10 +7314,10 @@ describe('Batch Payments',function(){
         cy.reload()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'CANADA USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'CANADA USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
             //Validate Purpose on batch payment
             cy.get('.ant-select-selector').eq(2).click()
@@ -7569,7 +7569,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('SINGAPORE{enter}' ,'USD{enter}' ,email)
         newRecipient.addBankDetailsWithAccNo('HSBCSGS2','55555555')
         const lName = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName,'SINGAPORE{enter}')
+        batchPayments.individualRecipient('SINGAPORE USD PF',lName,'SINGAPORE{enter}')
         batchPayments.paymentPurposeGBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -7584,7 +7584,7 @@ describe('Batch Payments',function(){
         batchPayments.addRecipient('SINGAPORE{enter}' ,'USD{enter}' ,email1)
         newRecipient.addBankDetailsWithAccNo('HSBCSGS2','55555555')
         const lName1 = batchPayments.generateRandomString(6)
-        batchPayments.individualRecipient('INDIVIDUAL USD PF',lName1,'SINGAPORE{enter}')
+        batchPayments.individualRecipient('SINGAPORE USD PF',lName1,'SINGAPORE{enter}')
         batchPayments.paymentPurpose1GBPEUR()
         cy.get('.ant-select-selector').eq(3).click()
         cy.get('.ant-select-dropdown').eq(3).find('.ant-select-item-option-content').then(Element=>{
@@ -7597,10 +7597,10 @@ describe('Batch Payments',function(){
         cy.reload()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()
-        let name= 'INDIVIDUAL USD PF'+' '+ lName+'{enter}'
+        let name= 'SINGAPORE USD PF'+' '+ lName+'{enter}'
         batchPayments.validateSearchBar(name)
         cy.wait(5000)
-        let name1 = 'INDIVIDUAL USD PF'+' ' + lName1+'{enter}'
+        let name1 = 'SINGAPORE USD PF'+' ' + lName1+'{enter}'
         batchPayments.validateSearchBar(name1)
             //Validate Purpose on batch payment
             cy.get('.ant-select-selector').eq(2).click()
@@ -8420,7 +8420,7 @@ describe('Batch Payments',function(){
         batchPayments.addBusinessRecipientFromBatch()
         
     })
-    it.only('TC_BP_133 - Verify that user can see the details of recipient on batch payment page by clicking View Details', function(){
+    it('TC_BP_133 - Verify that user can see the details of recipient on batch payment page by clicking View Details', function(){
         newRecipient.goToPaymentsDashborad()
         batchPayments.goToBatchPaymentPage()
         batchPayments.goToPayMultipleRecipient()

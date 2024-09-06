@@ -1,4 +1,4 @@
-/// <reference types= "cypress" />
+/// <reference types= "Cypress" />
 import { SigninPage } from "../PageObject/PageAction/SigninPage";
 import { collection } from "../PageObject/PageAction/collection";
 
@@ -8,24 +8,24 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 describe('Automate POST API with WSSE Header', () => {
-    let userName = 'faisal_tests_vo-201_5th_eea@gmail.com'
+    let userName = 'faisal_tests_uk+5@gmail.com'
     let password = 'testTest1'
     beforeEach(() => {
         cy.visit('https://webapp4.volopa.com/')
         signin.Login(userName, password)
-        cy.viewport(2048,1280)
+        cy.viewport(1440,900)
     })
     const baseUrl = 'https://devapi.volopa.com/VolopaApi';
     const endpoint = '/tcc/demo/funding/create';
-    const eea = 1;
+    const eea = 0;
     const currency = 'GBP';
-    const min = 5;
-    const max = 10;
-    const amount = getRandomNumber(min, max);
+    const min = 5000;
+    const max = 10000;
+    const amount = getRandomNumber(min, max); 
     //const amount = 10;
     const sender= 'Test sender'
-    const onBehalfOf = '9b1abde1-755c-4219-89a4-023f2c069826';
-    const receiverAccountNumber = 'GB76TCCL12345661162490';
+    const onBehalfOf = 'afa1602a-a741-484c-9c5d-4da68c7debbd';
+    const receiverAccountNumber = 'GB63TCCL12345648886889';
   
     const wsseUser = 'devApiUser';
     const wsseSecret = '87SDKhf!n@$#T@4gA1fg34s';

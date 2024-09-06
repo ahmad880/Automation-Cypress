@@ -1,4 +1,4 @@
-/// <reference types = "cypress"/>
+/// <reference types = "Cypress"/>
 
 import { SigninPage } from "../PageObject/PageAction/SigninPage"
 import { FundingHistory } from "../PageObject/PageAction/FundingHistory"

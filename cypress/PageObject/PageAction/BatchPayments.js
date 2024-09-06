@@ -102,7 +102,7 @@ export class BatchPayments {
         });
     }
     generateRandomString(length) {
-        const characters = 'abcdefghijklmnopqrstuvwxyz!#$%^&*';
+        const characters = 'abcdefghijklmnopqrstuvwxyz';
         let randomString = '';
     
         for (let i = 0; i < length; i++) {

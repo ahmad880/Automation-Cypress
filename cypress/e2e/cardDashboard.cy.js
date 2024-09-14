@@ -12,6 +12,7 @@ describe('CardDashboard TS_003 ',function(){
     beforeEach(() => {
         cy.visit('https://webapp5.volopa.com/')
         signin.Login(userName, password)
+        cy.viewport(1440,900)
         cy.get('[class="ant-space-item"] [type="button"]').eq(0).click()
         cy.get(':nth-child(3) > .ant-card > .ant-card-body > .ant-space').should('contain.text','Cards').click()
     })

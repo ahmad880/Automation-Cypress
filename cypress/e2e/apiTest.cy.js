@@ -8,7 +8,7 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 describe('Automate POST API with WSSE Header', () => {
-    let userName = 'faisal_tests_uk+5@gmail.com'
+    let userName = 'hamzaQA3@volopa.com'
     let password = 'testTest1'
     beforeEach(() => {
         cy.visit('https://webapp4.volopa.com/')
@@ -19,13 +19,13 @@ describe('Automate POST API with WSSE Header', () => {
     const endpoint = '/tcc/demo/funding/create';
     const eea = 0;
     const currency = 'GBP';
-    const min = 5000;
-    const max = 10000;
+    const min = 50;
+    const max = 100;
     const amount = getRandomNumber(min, max); 
     //const amount = 10;
     const sender= 'Test sender'
-    const onBehalfOf = 'afa1602a-a741-484c-9c5d-4da68c7debbd';
-    const receiverAccountNumber = 'GB63TCCL12345648886889';
+    const onBehalfOf = '10de348d-08d6-4144-a553-2637c609dbbb';
+    const receiverAccountNumber = 'GB82TCCL12345607825186';
   
     const wsseUser = 'devApiUser';
     const wsseSecret = '87SDKhf!n@$#T@4gA1fg34s';
